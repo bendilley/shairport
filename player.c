@@ -484,7 +484,7 @@ static void *player_thread_func(void *arg) {
 
 // takes the volume as specified by the airplay protocol
 void player_volume(double f) {
-    double linear_volume = pow(10.0, 0.05*f);
+    double linear_volume = fmax(f + 30, 0)/30.0;
 
     if (config.output->volume) {
         config.output->volume(linear_volume);
